@@ -517,7 +517,38 @@
     .doc-card{padding:11px 12px}
   }
 </style>
-</head>
+<style id="ios-answer-notes-and-colors">
+  body[data-theme="light"]{color-scheme:only light}
+  body[data-theme="dark"]{color-scheme:only dark}
+  .lookup-note-label{margin:22px 0 8px}
+  .lookup-note-box{display:block;min-height:100px;padding:12px 14px;border-radius:12px;font-size:16px;line-height:1.6;appearance:none;-webkit-appearance:none;}
+  .lookup-result,.lookup-option,.option,.feedback,.note-box{forced-color-adjust:none;-webkit-text-size-adjust:100%}
+  body[data-theme="light"] .option.correct{background:#eaf7ee;color:#245a35;border-color:#69aa7c}
+  body[data-theme="light"] .option.wrong{background:#fff0ed;color:#873f38;border-color:#d8897d}
+  body[data-theme="light"] .feedback.good{background:#e7f5eb;color:#245c36}
+  body[data-theme="light"] .feedback.bad{background:#fff0ed;color:#873f38}
+  body[data-theme="light"] .lookup-option.correct{background:#eaf7ee;color:#245a35;border-color:#69aa7c}
+  body[data-theme="light"] .lookup-answer{color:#24653b}
+  body[data-theme="light"] .review-item.ok{border-left-color:#48a565}
+  body[data-theme="light"] .review-item.no{border-left-color:#d16c5e}
+  body[data-theme="dark"] .option.correct{background:#173a2a;color:#d3f3dd;border-color:#4eaa70}
+  body[data-theme="dark"] .option.wrong{background:#3a2328;color:#ffded9;border-color:#c96d68}
+  body[data-theme="dark"] .option.correct .option-key{background:#287347;color:#fff;border-color:#55b97a}
+  body[data-theme="dark"] .option.wrong .option-key{background:#a84248;color:#fff;border-color:#d77b79}
+  body[data-theme="dark"] .feedback.good{background:#173a2a;color:#d3f3dd}
+  body[data-theme="dark"] .feedback.bad{background:#3a2328;color:#ffded9}
+  body[data-theme="dark"] .lookup-option{background:#172238;color:#dbe6f5;border-color:#344159}
+  body[data-theme="dark"] .lookup-option.correct{background:#173a2a;color:#d3f3dd;border-color:#4eaa70}
+  body[data-theme="dark"] .lookup-answer{color:#9de2b0}
+  body[data-theme="dark"] .lookup-explanation{color:#c9d6e9}
+  body[data-theme="dark"] .lookup-note-box,body[data-theme="dark"] .note-box{background:#111827;color:#e8efff;border-color:#3a4962;caret-color:#8acbff}
+  body[data-theme="dark"] .note-status.saved{color:#8ee0a6}
+  body[data-theme="dark"] .review-item.ok{background:#14271f;color:#e2f5e8;border-left-color:#61c882}
+  body[data-theme="dark"] .review-item.no{background:#2c1c22;color:#ffe7e8;border-left-color:#e17d7c}
+  body[data-theme="dark"] .review-item.ok p,body[data-theme="dark"] .review-item.no p{color:#d0d9e8}
+  body[data-theme="dark"] .review-item.ok b,body[data-theme="dark"] .review-item.no b{color:#fff}
+  @media(max-width:560px){.lookup-note-box{min-height:110px;font-size:16px;padding:13px}}
+</style></head>
 <body class="auth-checking" data-theme="dark">
   <section id="first-open-gate" role="dialog" aria-modal="true" aria-labelledby="first-open-title">
     <div class="first-open-card">
@@ -729,19 +760,26 @@
     const NOTES_KEY='nano-quiz-question-notes-v1',PREFS_KEY='nano-quiz-preferences-v1';
     function noteKey(q){return `${q.number??''}::${q.text}`;}
     function loadNotes(){try{return JSON.parse(localStorage.getItem(NOTES_KEY)||'{}');}catch{return {};}}
-    function saveQuestionNote(q,value){const key=noteKey(q);if(value.trim())state.notes[key]=value;else delete state.notes[key];const status=$('note-status');try{localStorage.setItem(NOTES_KEY,JSON.stringify(state.notes));status.textContent='已儲存';status.className='note-status saved';}catch{status.textContent='儲存失敗';status.className='note-status failed';}}
-    function savePreferences(){try{localStorage.setItem(PREFS_KEY,JSON.stringify({randomize:$('shuffle-toggle').checked}));}catch{}}
+    function saveQuestionNote(q,value,statusElement){const key=noteKey(q);if(value.trim())state.notes[key]=value;else delete state.notes[key];const status=statusElement||$('note-status');try{localStorage.setItem(NOTES_KEY,JSON.stringify(state.notes));if(status){status.textContent='已儲存於此裝置';status.className='note-status saved';}}catch{if(status){status.textContent='儲存失敗';status.className='note-status failed';}}}      function savePreferences(){try{localStorage.setItem(PREFS_KEY,JSON.stringify({randomize:$('shuffle-toggle').checked}));}catch{}}
     state.notes=loadNotes();try{const preferences=JSON.parse(localStorage.getItem(PREFS_KEY)||'{}');$('shuffle-toggle').checked=preferences.randomize!==false;}catch{$('shuffle-toggle').checked=true;}
     function showLookupQuestion(){
-      const raw=$('lookup-number').value.trim(),number=Number(raw),message=$('lookup-message'),result=$('lookup-result');result.replaceChildren();result.classList.add('hidden');
-      if(!raw||!Number.isInteger(number)||number<1){message.textContent='請輸入有效的正整數題號。';return;}
-      const q=BANK.find(item=>Number(item.number)===number);if(!q){message.textContent='題庫中找不到第 '+number+' 題，請確認題號後再試。';return;}
-      message.textContent='找到第 '+number+' 題。';const title=document.createElement('h2');title.textContent='第 '+number+' 題｜'+q.text;result.append(title);
-      (q.options||[]).forEach((option,index)=>{const row=document.createElement('div');row.className='lookup-option'+(index===q.answer?' correct':'');row.textContent=String.fromCharCode(65+index)+'．'+(option||'（無選項文字）')+(index===q.answer?'　✓ 正確答案':'');result.append(row);});
-      const answer=document.createElement('p');answer.className='lookup-answer';answer.textContent='正確答案：'+String.fromCharCode(65+q.answer)+'．'+(q.options?.[q.answer]||'');result.append(answer);
-      if(q.image){const image=document.createElement('img');image.className='question-image';image.src=q.image;image.alt='第 '+number+' 題附圖';result.append(image);}if(q.explanation){const explanation=document.createElement('p');explanation.className='lookup-explanation';explanation.textContent='解析：'+q.explanation;result.append(explanation);}result.classList.remove('hidden');
-    }
-    function showView(view) { views.forEach(v => v.classList.toggle('active', v === view)); document.body.classList.toggle('in-exam', view.id === 'exam-view'); const tab=view.id==='lookup-view'?'lookup':view.id==='study-view'?'study':view.id==='progress-view'?'progress':view.id==='stats-view'?'stats':'practice'; document.querySelectorAll('[data-app-nav]').forEach(button=>{if(button.dataset.appNav===tab)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');}); window.scrollTo({top:0,behavior:'smooth'}); }
+  const raw=$('lookup-number').value.trim(),number=Number(raw),message=$('lookup-message'),result=$('lookup-result');
+  result.replaceChildren();result.classList.add('hidden');
+  if(!raw||!Number.isInteger(number)||number<1){message.textContent='請輸入有效的正整數題號。';return;}
+  const q=BANK.find(item=>Number(item.number)===number);
+  if(!q){message.textContent='題庫中找不到第 '+number+' 題，請確認題號後再試。';return;}
+  message.textContent='找到第 '+number+' 題。';
+  const title=document.createElement('h2');title.textContent='第 '+number+' 題｜'+q.text;result.append(title);
+  (q.options||[]).forEach((option,index)=>{const row=document.createElement('div');row.className='lookup-option'+(index===q.answer?' correct':'');row.textContent=String.fromCharCode(65+index)+'．'+(option||'（無選項文字）')+(index===q.answer?'　✓ 正確答案':'');result.append(row);});
+  const answer=document.createElement('p');answer.className='lookup-answer';answer.textContent='正確答案：'+String.fromCharCode(65+q.answer)+'．'+(q.options?.[q.answer]||'');result.append(answer);
+  if(q.image){const image=document.createElement('img');image.className='question-image';image.src=q.image;image.alt='第 '+number+' 題附圖';result.append(image);}
+  if(q.explanation){const explanation=document.createElement('p');explanation.className='lookup-explanation';explanation.textContent='解析：'+q.explanation;result.append(explanation);}
+  const savedNote=state.notes[noteKey(q)]||'',noteLabel=document.createElement('label'),noteHeading=document.createElement('span'),noteStatus=document.createElement('span'),note=document.createElement('textarea');
+  noteLabel.className='note-label lookup-note-label';noteLabel.htmlFor='lookup-note';noteHeading.textContent='本題筆記';
+  noteStatus.className='note-status';noteStatus.id='lookup-note-status';noteStatus.setAttribute('aria-live','polite');noteStatus.textContent=savedNote?'已儲存於此裝置':'僅儲存在此裝置';
+  noteLabel.append(noteHeading,noteStatus);note.id='lookup-note';note.className='note-box lookup-note-box';note.rows=3;note.value=savedNote;note.placeholder='記下這題的解法、易錯點或複習提醒…';
+  note.addEventListener('input',()=>saveQuestionNote(q,note.value,noteStatus));result.append(noteLabel,note);result.classList.remove('hidden');
+}function showView(view) { views.forEach(v => v.classList.toggle('active', v === view)); document.body.classList.toggle('in-exam', view.id === 'exam-view'); const tab=view.id==='lookup-view'?'lookup':view.id==='study-view'?'study':view.id==='progress-view'?'progress':view.id==='stats-view'?'stats':'practice'; document.querySelectorAll('[data-app-nav]').forEach(button=>{if(button.dataset.appNav===tab)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');}); window.scrollTo({top:0,behavior:'smooth'}); }
     const HISTORY_KEY='nano-quiz-history-v1';
     const STUDY_PROGRESS_KEY='tc-vacuum-study-progress-v1';
     function getHistory(){try{return JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]');}catch{return [];}}
