@@ -448,6 +448,54 @@
 .doc-card{min-width:0}.doc-preview{margin-top:12px}.doc-preview>summary{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 13px;border:1px solid #8fb9ff66;border-radius:11px;background:#3478f60f;color:var(--accent,#2673dc);font-size:13px;font-weight:750;cursor:pointer;list-style:none}.doc-preview>summary::-webkit-details-marker{display:none}.doc-preview>summary:focus-visible,.review-pdf-links a:focus-visible{outline:3px solid #5bc9ef;outline-offset:3px}.doc-preview[open]>summary{margin-bottom:10px;background:#3478f61a}.doc-preview-frame{overflow:hidden;border:1px solid #ffffff35;border-radius:12px;background:#111827}.doc-preview-frame iframe{display:block;width:100%;height:72vh;min-height:520px;border:0;background:#111827}.doc-preview-note{margin:9px 0 0!important;color:var(--muted,#8590a8)!important;font-size:12px!important;line-height:1.65}.doc-preview-note a,.review-pdf-links a{color:var(--accent,#2673dc);font-weight:700}.review-pdf-links{display:flex;flex-wrap:wrap;gap:5px 10px;margin-top:6px}.review-pdf-links a{font-size:11px;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px}.review-pdf-links a:hover{text-decoration:underline}
 @media(max-width:760px){.doc-grid{grid-template-columns:1fr}.doc-card strong{min-height:0}.doc-preview-frame iframe{height:68vh;height:68svh;min-height:440px}}
 </style>
+<style id="chapter-layout-polish">
+  .study-section-head{align-items:flex-end;margin:25px 0 11px}
+  .study-section-head h2{font-size:18px;letter-spacing:-.02em}
+  .study-section-head p{max-width:48rem;line-height:1.55}
+  .review-topic-groups{gap:13px}
+  .review-topic-group{min-width:0;padding:14px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.52)}
+  .review-topic-group-head{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:10px;margin:0 0 10px;padding:0 0 10px;border-bottom:1px solid var(--line)}
+  .review-topic-group-head>span{padding:6px 9px;white-space:nowrap;font-size:10px;letter-spacing:.02em}
+  .review-topic-group-head h3{font-size:14px;letter-spacing:-.01em}
+  .review-topic-group-head p{margin-top:2px;font-size:11px;line-height:1.4}
+  .review-grid{gap:9px}
+  .review-card{border-radius:13px;box-shadow:0 3px 12px rgba(29,40,85,.045)}
+  .review-card summary{gap:10px;padding:11px 12px}
+  .review-number{width:30px;height:30px;border-radius:9px;font-size:12px}
+  .review-summary strong{font-size:13px;line-height:1.4}
+  .review-summary small{font-size:10.5px;line-height:1.45}
+  .review-chevron{flex:none;margin-left:auto}
+  .review-content{padding:11px 13px 13px}
+  .review-content p,.review-content ul{font-size:12px;line-height:1.65}
+  .review-content li{margin:4px 0}
+  .study-materials{margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+  .study-materials .study-section-head{margin:0 0 10px}
+  .doc-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
+  .doc-card{display:flex;min-width:0;flex-direction:column;padding:13px;border:1px solid var(--line);border-radius:14px;background:var(--white);box-shadow:0 5px 16px rgba(29,40,85,.045)}
+  .doc-card strong{min-height:0;font-size:12px;line-height:1.45}
+  .doc-card>span{margin:5px 0 0;font-size:10.5px;line-height:1.5}
+  .doc-preview{margin-top:auto;padding-top:10px}
+  .doc-preview>summary{min-height:40px;font-size:12px}
+  body[data-theme="dark"] .review-topic-group{background:rgba(19,27,46,.72)}
+  body[data-theme="dark"] .doc-card{background:#131b2e;border-color:#2a3650}
+  @media(max-width:900px){.doc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media(max-width:700px){
+    .study-section-head{margin:22px 0 10px}
+    .study-section-head p{font-size:11px}
+    .review-topic-groups{gap:10px}
+    .review-topic-group{padding:11px;border-radius:15px}
+    .review-topic-group-head{grid-template-columns:auto minmax(0,1fr);gap:8px;margin-bottom:8px;padding-bottom:8px}
+    .review-topic-group-head>span{padding:5px 7px;font-size:9px}
+    .review-topic-group-head h3{font-size:13px}
+    .review-topic-group-head p{font-size:10px}
+    .review-grid{gap:7px}
+    .review-card summary{padding:10px;gap:9px}
+    .review-content{padding:10px 11px 12px}
+    .study-materials{margin-top:18px;padding-top:13px}
+    .doc-grid{grid-template-columns:1fr;gap:8px;margin-top:9px}
+    .doc-card{padding:11px 12px}
+  }
+</style>
 </head>
 <body class="auth-checking" data-theme="dark">
   <section id="first-open-gate" role="dialog" aria-modal="true" aria-labelledby="first-open-title">
@@ -542,7 +590,7 @@
         <p>以下重點依你提供的真空技術第 0–4 章、第 5–6 章，以及光學薄膜講義整理。點開各主題可先閱讀，再按「練本章題目」立即切換到相應題庫。數值與設備操作細節請以老師原始投影片為準。</p>
 
       </section>
-      <div class="study-section-head"><div><h2>章節重點</h2><p>展開卡片閱讀摘要；跨章題目會在相關主題中重複出現。</p></div></div>
+      <div class="study-section-head"><div><h2>章節重點</h2><p>依內容分成三組，共 7 個主題。展開主題閱讀重點，或直接開始練習。</p></div></div>
       <div class="review-topic-groups">
         <section class="review-topic-group" aria-labelledby="review-group-foundations">
           <div class="review-topic-group-head"><span>主題 01–04</span><div><h3 id="review-group-foundations">真空原理與核心設備</h3><p>先建立壓力、幫浦、量測和材料的基礎。</p></div></div>
@@ -563,7 +611,10 @@
         <section class="review-topic-group" aria-labelledby="review-group-coatings">
           <div class="review-topic-group-head"><span>主題 07</span><div><h3 id="review-group-coatings">光學薄膜製程</h3><p>整理薄膜、鍍膜方法、電漿與品質量測。</p></div></div>
           <div class="review-grid">
-<details class="review-card"><summary><span class="review-number">07</span><span class="review-summary"><strong>光學薄膜、鍍膜與電漿</strong><small>PVD、熱蒸鍍、濺鍍、基板準備與膜層
+<details class="review-card"><summary><span class="review-number">07</span><span class="review-summary"><strong>光學薄膜、鍍膜與電漿</strong><small>PVD、熱蒸鍍、濺鍍、基板準備與膜層量測</small></span><span class="review-chevron">⌄</span></summary><div class="review-content"><p><b>先理解：</b>PVD 的共同步驟是產生氣相材料、讓粒子在低壓環境中傳輸，再使粒子到達基板並凝結成膜。真空可減少氣體碰撞與污染。</p><ul><li>基板需清洗、乾燥、檢查並妥善裝載；避免灰塵、油污和水痕影響附著與膜層缺陷。</li><li>熱蒸鍍以加熱使材料蒸發；濺鍍以離子撞擊靶材並傳遞動量。DC 常配合導電靶，RF 可用於絕緣靶材。</li><li>流程包括裝片、抽真空、確認條件、鍍膜、冷卻、依程序破真空、取片與量測。膜厚、均勻性與光譜特性是不同的品質檢查項目。</li><li>濺射產率可理解為入射離子造成的靶材原子逸出數；電漿、工作氣壓和基板位置都會影響製程結果。</li></ul><div class="formula-row"><span class="formula-chip">電阻加熱：P = I²R</span><span class="formula-chip">濺射產率 = 濺出靶原子數／入射離子數</span></div><div class="review-source">主要來源：光學薄膜技術講義；真空環境與幫浦搭配見真空技術講義 <span class="review-pdf-links"><a href="#pdf-optical-film" class="review-pdf-link">薄膜 PDF</a><a href="#pdf-vacuum-04" class="review-pdf-link">真空 0–4 章 PDF</a><a href="#pdf-vacuum-56" class="review-pdf-link">真空 5–6 章 PDF</a></span></div><div class="review-actions"><button class="review-practice" data-review-chapter="7">練第 7 組題目 →</button></div></div></details>
+          </div>
+        </section>
+      </div>
       <section class="study-materials" aria-labelledby="study-materials-title">
         <div class="study-section-head"><div><h2 id="study-materials-title">原始課堂講義</h2><p>需要核對公式、數值或設備細節時，開啟老師提供的完整教材。</p></div></div>
         <div class="doc-grid" aria-label="原始課堂教材">
@@ -571,10 +622,7 @@
           <article class="doc-card" id="pdf-vacuum-56"><strong>真空技術講義｜第 5 章至第 6 章</strong><span>真空系統與測漏等後續主題・PDF 約 17 MB</span><details class="doc-preview"><summary>在本頁閱讀講義</summary><div class="doc-preview-frame"><iframe data-pdf-src="./pdf/vacuum-lecture-chapters-5-6.pdf#view=FitH" title="真空技術講義第 5 章至第 6 章" loading="lazy"></iframe></div><p class="doc-preview-note">如果此瀏覽器不支援內嵌閱讀，可<a href="./pdf/vacuum-lecture-chapters-5-6.pdf" target="_blank" rel="noopener">開啟完整 PDF ↗</a>，或<a href="./pdf/vacuum-lecture-chapters-5-6.pdf" download>下載檔案</a>。</p></details></article>
           <article class="doc-card" id="pdf-optical-film"><strong>光學薄膜技術講義</strong><span>薄膜製程、蒸鍍／濺鍍、品質與量測・PDF 約 34 MB</span><details class="doc-preview"><summary>在本頁閱讀講義</summary><div class="doc-preview-frame"><iframe data-pdf-src="./pdf/optical-film-lecture.pdf#view=FitH" title="光學薄膜技術講義" loading="lazy"></iframe></div><p class="doc-preview-note">如果此瀏覽器不支援內嵌閱讀，可<a href="./pdf/optical-film-lecture.pdf" target="_blank" rel="noopener">開啟完整 PDF ↗</a>，或<a href="./pdf/optical-film-lecture.pdf" download>下載檔案</a>。</p></details></article>
         </div>
-      </section>量測</small></span><span class="review-chevron">⌄</span></summary><div class="review-content"><p><b>先理解：</b>PVD 的共同步驟是產生氣相材料、讓粒子在低壓環境中傳輸，再使粒子到達基板並凝結成膜。真空可減少氣體碰撞與污染。</p><ul><li>基板需清洗、乾燥、檢查並妥善裝載；避免灰塵、油污和水痕影響附著與膜層缺陷。</li><li>熱蒸鍍以加熱使材料蒸發；濺鍍以離子撞擊靶材並傳遞動量。DC 常配合導電靶，RF 可用於絕緣靶材。</li><li>流程包括裝片、抽真空、確認條件、鍍膜、冷卻、依程序破真空、取片與量測。膜厚、均勻性與光譜特性是不同的品質檢查項目。</li><li>濺射產率可理解為入射離子造成的靶材原子逸出數；電漿、工作氣壓和基板位置都會影響製程結果。</li></ul><div class="formula-row"><span class="formula-chip">電阻加熱：P = I²R</span><span class="formula-chip">濺射產率 = 濺出靶原子數／入射離子數</span></div><div class="review-source">主要來源：光學薄膜技術講義；真空環境與幫浦搭配見真空技術講義 <span class="review-pdf-links"><a href="#pdf-optical-film" class="review-pdf-link">薄膜 PDF</a><a href="#pdf-vacuum-04" class="review-pdf-link">真空 0–4 章 PDF</a><a href="#pdf-vacuum-56" class="review-pdf-link">真空 5–6 章 PDF</a></span></div><div class="review-actions"><button class="review-practice" data-review-chapter="7">練第 7 組題目 →</button></div></div></details>
-          </div>
-        </section>
-      </div>
+      </section>
       <p class="study-footnote"><b>複習建議：</b>先讀一個主題並遮住重點自我說明，再做該組題目。題號依主題對應整理，跨主題題目可能重複；特定數值、真空計量程及設備參數請回到原始投影片核對。</p>
     </section>
 
