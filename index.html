@@ -458,7 +458,13 @@
   .pdf-reader-new-tab,.pdf-reader-close{display:grid;width:38px;height:38px;place-items:center;border:1px solid #43516b;border-radius:10px;background:#1b2638;color:#f2f6ff;text-decoration:none;font-size:18px;font-weight:700}
   .pdf-reader-new-tab{font-size:15px}
   .pdf-reader-close{cursor:pointer}
+  .pdf-reader-content{position:relative;display:flex;min-height:0;flex:1;background:#202a3a}
   .pdf-reader-frame{display:block;width:100%;min-height:0;flex:1;border:0;background:#202a3a}
+  .pdf-reader-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:20px;background:#202a3a;color:#dbe5f7;text-align:center;font-size:14px}
+  .pdf-reader-loading[hidden]{display:none!important}
+  .pdf-reader-spinner{width:28px;height:28px;border:3px solid #8291aa55;border-top-color:#67c8f2;border-radius:50%;animation:pdf-reader-spin .8s linear infinite}
+  .pdf-reader-loading small{color:#a9b7cc;font-size:12px}
+  @keyframes pdf-reader-spin{to{transform:rotate(360deg)}}
   body.pdf-reader-open{overflow:hidden}
   @media(max-width:700px){
     .doc-card{min-height:58px;padding:9px 10px}
@@ -1078,24 +1084,30 @@
         <button class="pdf-reader-close" id="pdf-reader-close" type="button" aria-label="關閉">×</button>
       </div>
     </header>
-    <iframe class="pdf-reader-frame" id="pdf-reader-frame" title="課堂講義 PDF"></iframe>
+    <div class="pdf-reader-content">
+      <iframe class="pdf-reader-frame" id="pdf-reader-frame" title="課堂講義 PDF"></iframe>
+      <div class="pdf-reader-loading" id="pdf-reader-loading" role="status" aria-live="polite" hidden><span class="pdf-reader-spinner" aria-hidden="true"></span><span>PDF 讀取中…</span><small>大檔案載入需要等候；也可點右上角另開閱讀</small></div>
+    </div>
   </section>
 </div>
 <script id="inline-pdf-reader-behavior">
 (function(){
   var reader=document.getElementById('pdf-reader');
   var frame=document.getElementById('pdf-reader-frame');
+  var loading=document.getElementById('pdf-reader-loading');
   var title=document.getElementById('pdf-reader-title');
   var closeButton=document.getElementById('pdf-reader-close');
   var newTab=document.getElementById('pdf-reader-new-tab');
-  if(!reader||!frame||!title||!closeButton||!newTab)return;
+  if(!reader||!frame||!loading||!title||!closeButton||!newTab)return;
   var lastTrigger=null;
+  frame.addEventListener('load',function(){loading.hidden=true;});
   function closeReader(){
     if(reader.hidden)return;
     reader.hidden=true;
     reader.setAttribute('aria-hidden','true');
     document.body.classList.remove('pdf-reader-open');
     frame.removeAttribute('src');
+    loading.hidden=true;
     newTab.removeAttribute('href');
     if(lastTrigger&&typeof lastTrigger.focus==='function')lastTrigger.focus();
   }
@@ -1104,6 +1116,7 @@
     if(!src)return;
     lastTrigger=trigger;
     title.textContent=trigger.getAttribute('data-pdf-title')||'PDF';
+    loading.hidden=false;
     frame.src=src;
     newTab.href=src;
     reader.hidden=false;
