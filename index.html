@@ -401,7 +401,6 @@
     .review-topic-group-head{display:flex;align-items:center;gap:12px;margin:0 0 12px}
     .review-topic-group-head>span{flex:0 0 auto;padding:7px 10px;border:1px solid rgba(96,165,250,.24);border-radius:999px;background:rgba(37,99,235,.1);color:#377edb;font-size:10px;font-weight:850}
     .review-topic-group-head h3{margin:0;color:var(--ink);font-size:15px;line-height:1.3}
-    .review-topic-group-head p{margin:3px 0 0;color:var(--muted);font-size:11px;line-height:1.5}
     .review-topic-group:last-child .review-grid{grid-template-columns:minmax(0,1fr)}
     .study-materials{margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
     @media(max-width:700px){
@@ -444,9 +443,31 @@
       #setup-card .setup-foot{font-size:11px;line-height:1.7}
     }
     body[data-theme="dark"] #setup-card .select-row:not(.hidden) .field select{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23c3cfdf%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22m7 10 5 5 5-5%22/%3E%3C/svg%3E")}
-  </style><style id="inline-pdf-reader-styles">
-.doc-card{min-width:0}.doc-preview{margin-top:12px}.doc-preview>summary{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 13px;border:1px solid #8fb9ff66;border-radius:11px;background:#3478f60f;color:var(--accent,#2673dc);font-size:13px;font-weight:750;cursor:pointer;list-style:none}.doc-preview>summary::-webkit-details-marker{display:none}.doc-preview>summary:focus-visible,.review-pdf-links a:focus-visible{outline:3px solid #5bc9ef;outline-offset:3px}.doc-preview[open]>summary{margin-bottom:10px;background:#3478f61a}.doc-preview-frame{overflow:hidden;border:1px solid #ffffff35;border-radius:12px;background:#111827}.doc-preview-frame iframe{display:block;width:100%;height:72vh;min-height:520px;border:0;background:#111827}.doc-preview-note{margin:9px 0 0!important;color:var(--muted,#8590a8)!important;font-size:12px!important;line-height:1.65}.doc-preview-note a,.review-pdf-links a{color:var(--accent,#2673dc);font-weight:700}.review-pdf-links{display:flex;flex-wrap:wrap;gap:5px 10px;margin-top:6px}.review-pdf-links a{font-size:11px;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px}.review-pdf-links a:hover{text-decoration:underline}
-@media(max-width:760px){.doc-grid{grid-template-columns:1fr}.doc-card strong{min-height:0}.doc-preview-frame iframe{height:68vh;height:68svh;min-height:440px}}
+  </style><style id="pdf-reader-modal-styles">
+  .doc-card{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px;padding:11px 13px}
+  .doc-card strong{min-height:0;margin:0;font-size:12px;line-height:1.45}
+  .doc-open{display:inline-flex;align-items:center;justify-content:center;flex:none;min-height:40px;padding:0 12px;border:1px solid #8fb9ff66;border-radius:11px;background:#3478f610;color:var(--accent,#2673dc)!important;font-size:12px;font-weight:750;text-decoration:none!important;white-space:nowrap}
+  .doc-open:hover{background:#3478f61c}
+  .doc-open:focus-visible,.review-pdf-link:focus-visible,.pdf-reader button:focus-visible,.pdf-reader a:focus-visible{outline:3px solid #5bc9ef;outline-offset:3px}
+  .pdf-reader[hidden]{display:none!important}
+  .pdf-reader{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;padding:clamp(0px,3vh,24px);background:rgba(5,10,20,.82);backdrop-filter:blur(6px)}
+  .pdf-reader-panel{display:flex;width:min(1120px,100%);height:min(92vh,940px);height:min(92dvh,940px);min-height:0;flex-direction:column;overflow:hidden;border:1px solid #34425b;border-radius:16px;background:#111827;box-shadow:0 24px 80px #0008}
+  .pdf-reader-toolbar{display:flex;min-height:54px;align-items:center;gap:12px;padding:8px 12px 8px 16px;border-bottom:1px solid #2d3748;background:#111827;color:#f2f6ff}
+  .pdf-reader-title{overflow:hidden;flex:1;margin:0;font-size:14px;font-weight:700;text-overflow:ellipsis;white-space:nowrap}
+  .pdf-reader-actions{display:flex;align-items:center;gap:7px}
+  .pdf-reader-new-tab,.pdf-reader-close{display:grid;width:38px;height:38px;place-items:center;border:1px solid #43516b;border-radius:10px;background:#1b2638;color:#f2f6ff;text-decoration:none;font-size:18px;font-weight:700}
+  .pdf-reader-new-tab{font-size:15px}
+  .pdf-reader-close{cursor:pointer}
+  .pdf-reader-frame{display:block;width:100%;min-height:0;flex:1;border:0;background:#202a3a}
+  body.pdf-reader-open{overflow:hidden}
+  @media(max-width:700px){
+    .doc-card{min-height:58px;padding:9px 10px}
+    .doc-open{min-height:40px;padding:0 10px}
+    .pdf-reader{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+    .pdf-reader-panel{width:100%;height:100vh;height:100dvh;border:0;border-radius:0}
+    .pdf-reader-toolbar{min-height:50px;padding:6px 9px 6px 12px}
+    .pdf-reader-title{font-size:13px}
+  }
 </style>
 <style id="chapter-layout-polish">
   .study-section-head{align-items:flex-end;margin:25px 0 11px}
@@ -457,13 +478,11 @@
   .review-topic-group-head{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:10px;margin:0 0 10px;padding:0 0 10px;border-bottom:1px solid var(--line)}
   .review-topic-group-head>span{padding:6px 9px;white-space:nowrap;font-size:10px;letter-spacing:.02em}
   .review-topic-group-head h3{font-size:14px;letter-spacing:-.01em}
-  .review-topic-group-head p{margin-top:2px;font-size:11px;line-height:1.4}
   .review-grid{gap:9px}
   .review-card{border-radius:13px;box-shadow:0 3px 12px rgba(29,40,85,.045)}
   .review-card summary{gap:10px;padding:11px 12px}
   .review-number{width:30px;height:30px;border-radius:9px;font-size:12px}
   .review-summary strong{font-size:13px;line-height:1.4}
-  .review-summary small{font-size:10.5px;line-height:1.45}
   .review-chevron{flex:none;margin-left:auto}
   .review-content{padding:11px 13px 13px}
   .review-content p,.review-content ul{font-size:12px;line-height:1.65}
@@ -471,11 +490,8 @@
   .study-materials{margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
   .study-materials .study-section-head{margin:0 0 10px}
   .doc-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:12px}
-  .doc-card{display:flex;min-width:0;flex-direction:column;padding:13px;border:1px solid var(--line);border-radius:14px;background:var(--white);box-shadow:0 5px 16px rgba(29,40,85,.045)}
+  .doc-card{display:flex;min-width:0;flex-direction:row;align-items:center;justify-content:space-between;gap:12px;min-height:64px;padding:11px 13px;border:1px solid var(--line);border-radius:14px;background:var(--white);box-shadow:0 5px 16px rgba(29,40,85,.045)}
   .doc-card strong{min-height:0;font-size:12px;line-height:1.45}
-  .doc-card>span{margin:5px 0 0;font-size:10.5px;line-height:1.5}
-  .doc-preview{margin-top:auto;padding-top:10px}
-  .doc-preview>summary{min-height:40px;font-size:12px}
   body[data-theme="dark"] .review-topic-group{background:rgba(19,27,46,.72)}
   body[data-theme="dark"] .doc-card{background:#131b2e;border-color:#2a3650}
   @media(max-width:900px){.doc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -487,7 +503,6 @@
     .review-topic-group-head{grid-template-columns:auto minmax(0,1fr);gap:8px;margin-bottom:8px;padding-bottom:8px}
     .review-topic-group-head>span{padding:5px 7px;font-size:9px}
     .review-topic-group-head h3{font-size:13px}
-    .review-topic-group-head p{font-size:10px}
     .review-grid{gap:7px}
     .review-card summary{padding:10px;gap:9px}
     .review-content{padding:10px 11px 12px}
@@ -590,40 +605,40 @@
         <p>以下重點依你提供的真空技術第 0–4 章、第 5–6 章，以及光學薄膜講義整理。點開各主題可先閱讀，再按「練本章題目」立即切換到相應題庫。數值與設備操作細節請以老師原始投影片為準。</p>
 
       </section>
-      <div class="study-section-head"><div><h2>章節重點</h2><p>依內容分成三組，共 7 個主題。展開主題閱讀重點，或直接開始練習。</p></div></div>
+      <div class="study-section-head"><div><h2>章節重點</h2></div></div>
       <div class="review-topic-groups">
         <section class="review-topic-group" aria-labelledby="review-group-foundations">
-          <div class="review-topic-group-head"><span>主題 01–04</span><div><h3 id="review-group-foundations">真空原理與核心設備</h3><p>先建立壓力、幫浦、量測和材料的基礎。</p></div></div>
+          <div class="review-topic-group-head"><span>主題 01–04</span><div><h3 id="review-group-foundations">真空原理與核心設備</h3></div></div>
           <div class="review-grid">
-<details class="review-card"><summary><span class="review-number">01</span><span class="review-summary"><strong>真空基礎與氣體性質</strong><small>壓力、真空等級、分子運動與平均自由徑</small></span><span class="review-chevron">⌄</span></summary><div class="review-content"><p><b>先理解：</b>真空是某空間的氣體壓力低於大氣壓。壓力下降時，單位體積中的分子減少，平均自由徑增加；分子更常撞到腔壁而非彼此。</p><ul><li>熟悉 Pa、Torr、mbar、atm 的換算，並注意講義採用的真空等級界線。</li><li>理想氣體關係連結壓力、體積、溫度與分子數；定溫時可用 Boyle 關係分析壓力與體積變化。</li><li>用平均自由徑相對於管徑的大小理解黏滯流、過渡流和分子流；壓力界線是近似值，也受幾何尺寸影響。</li></ul><div class="formula-row"><span class="formula-chip">PV = nRT = NkT</span><span class="formula-chip">λ ∝ 1/P（定溫）</span><span class="formula-chip">1 atm ≈ 1.013×10⁵ Pa</span></div><div class="review-source">主要來源：真空技術第 0–4 章講義 <span class="review-pdf-links"><a href="#pdf-vacuum-04" class="review-pdf-link">閱讀第 0–4 章 PDF</a></span></div><div class="review-actions"><button class="review-practice" data-review-chapter="1">練第 1 組題目 →</button></div></div></details>
-<details class="review-card"><summary><span class="review-number">02</span><span class="review-summary"><strong>真空幫浦</strong><small>機械式、動量傳遞式與捕集式幫浦</small></span><span class="review-chevron">⌄</span></summary><div class="review-content"><p><b>先理解：</b>幫浦要把氣體由腔體移除。不同幫浦的工作壓力範圍、可抽氣體、抽速、污染風險和維護方式不同，常需串接成抽氣機組。</p><ul><li>機械式幫浦透過容積變化輸送氣體，常作粗抽或前級。</li><li>渦輪分子幫浦以高速轉子傳遞動量；擴散幫浦以高速蒸氣流帶走氣體，需注意油蒸氣回流。</li><li>冷凍幫浦以低溫表面捕集氣體，需定期再生；離子幫浦以放電、離子化與吸氣材料作用，適用潔淨高真空／超高真空用途。</li><li>選型時同時考慮極限壓力、工作氣體、氣體負荷、前級需求、污染、振動和維護。</li></ul><div class="review-source">主要來源：真空技術第 0–4 章及第 5–6 章講義 <span class="review-pdf-links"><a href="#pdf-vacuum-04" class="review-pdf-link">第 0–4 章 PDF</a><a href="#pdf-vacuum-56" class="review-pdf-link">第 5–6 章 PDF</a></span></div><div class="review-actions"><button class="review-practice" data-review-chapter="2">練第 2 組題目 →</button></div></div></details>
-<details class="review-card"><summary><span class="review-number">03</span><span class="review-summary"><strong>真空計與壓力量測</strong><small>直接／間接量測、適用範圍與校正</small></span><span class="review-chevron">⌄</span></summary><div class="review-content"><p><b>先理解：</b>沒有一種真空計能在所有壓力範圍內都保持準確。量測原理可能直接感受壓力，也可能量測與氣體壓力相關的熱傳或離子電流。</p><ul><li>依預期壓力範圍選擇真空計，並留意氣體種類、安裝位置、污染和校正狀態。</li><li>分辨總壓量測、漏氣檢測和殘留氣體分析；真空計讀值本身通常不能指出漏點位置。</li><li>系統跨越大氣壓至高真空時，常需要不同原理的量測器搭配使用。</li></ul><div class="review-source">主要來源：真空技術第 0–4 章及第 5–6 章講義 <span class="review-pdf-links"><a href="#pdf-vacuum-04" class="review-pdf-link">第 0–4 章 PDF</a><a href="#pdf-vacuum-56" class="review-pdf-link">第 5–6 章 PDF</a></span></div><div class="review-actions"><button class="review-practice" data-review-chapter="3">練第 3 組題目 →</button></div></div></details>
-<details class="review-card"><summary><span class="review-number">04</span><span class="review-summary"><strong>真空材料與元件</strong><small>材料選擇、密封、清洗與放氣</small></span><span class="review-chevron">⌄</span></summary><div class="review-content"><p><b>先理解：</b>材料與接合處會影響氣體負荷、可達壓力、耐烘烤性和污染。優先考慮低蒸氣壓、低放氣、可清潔且與製程相容的材料。</p><ul><li>認識不鏽鋼、鋁合金、無氧銅、陶瓷和彈性體各自的優缺點及適用情境。</li><li>法蘭、墊圈、焊接、波紋管與電氣穿隔件要兼顧密封、溫度和機械條件；CF 金屬密封與 O-ring 的使用限制不同。</li><li>清洗、乾燥和適當烘烤可降低水氣、油污與表面吸附造成的放氣；多孔或受污染表面會增加氣體負荷。</li></ul><div class="review-source">主要來源：真空技術第 0–4 章及第 5–6 章講義；薄膜基板清潔亦見光學薄膜講義 <span class="review-pdf-links"><a href="#pdf-vacuum-04" class="review-pdf-link">第 0–4 章 PDF</a><a href="#pdf-vacuum-56" class="review-pdf-link">第 5–6 章 PDF</a><a href="#pdf-optical-film" class="review-pdf-link">薄膜 PDF</a></span></div><div class="review-actions"><button class="review-practice" data-review-chapter="4">練第 4 組題目 →</button></div></div></details>
+<details class="review-card"><summary><span class="review-number">01</span><span class="review-summary"><strong>真空基礎與氣體性質</strong></span><span class="review-chevron">⌄</span></summary><div class="review-content"><p><b>先理解：</b>真空是某空間的氣體壓力低於大氣壓。壓力下降時，單位體積中的分子減少，平均自由徑增加；分子更常撞到腔壁而非彼此。</p><ul><li>熟悉 Pa、Torr、mbar、atm 的換算，並注意講義採用的真空等級界線。</li><li>理想氣體關係連結壓力、體積、溫度與分子數；定溫時可用 Boyle 關係分析壓力與體積變化。</li><li>用平均自由徑相對於管徑的大小理解黏滯流、過渡流和分子流；壓力界線是近似值，也受幾何尺寸影響。</li></ul><div class="formula-row"><span class="formula-chip">PV = nRT = NkT</span><span class="formula-chip">λ ∝ 1/P（定溫）</span><span class="formula-chip">1 atm ≈ 1.013×10⁵ Pa</span></div><div class="review-source">主要來源：真空技術第 0–4 章講義 <span class="review-pdf-links"><a href="./pdf/vacuum-lecture-chapters-0-4.pdf#view=FitH" class="review-pdf-link" data-pdf-open data-pdf-title="真空技術講義｜第 0 章至第 4 章">閱讀第 0–4 章 PDF</a></span></div><div class="review-actions"><button class="review-practice" data-review-chapter="1">練第 1 組題目 →</button></div></div></details>
+<details class="review-card"><summary><span class="review-number">02</span><span class="review-summary"><strong>真空幫浦</strong></span><span class="review-chevron">⌄</span></summary><div class="review-content"><p><b>先理解：</b>幫浦要把氣體由腔體移除。不同幫浦的工作壓力範圍、可抽氣體、抽速、污染風險和維護方式不同，常需串接成抽氣機組。</p><ul><li>機械式幫浦透過容積變化輸送氣體，常作粗抽或前級。</li><li>渦輪分子幫浦以高速轉子傳遞動量；擴散幫浦以高速蒸氣流帶走氣體，需注意油蒸氣回流。</li><li>冷凍幫浦以低溫表面捕集氣體，需定期再生；離子幫浦以放電、離子化與吸氣材料作用，適用潔淨高真空／超高真空用途。</li><li>選型時同時考慮極限壓力、工作氣體、氣體負荷、前級需求、污染、振動和維護。</li></ul><div class="review-source">主要來源：真空技術第 0–4 章及第 5–6 章講義 <span class="review-pdf-links"><a href="./pdf/vacuum-lecture-chapters-0-4.pdf#view=FitH" class="review-pdf-link" data-pdf-open data-pdf-title="真空技術講義｜第 0 章至第 4 章">第 0–4 章 PDF</a><a href="./pdf/vacuum-lecture-chapters-5-6.pdf#view=FitH" class="review-pdf-link" data-pdf-open data-pdf-title="真空技術講義｜第 5 章至第 6 章">第 5–6 章 PDF</a></span></div><div class="review-actions"><button class="review-practice" data-review-chapter="2">練第 2 組題目 →</button></div></div></details>
+<details class="review-card"><summary><span class="review-number">03</span><span class="review-summary"><strong>真空計與壓力量測</strong></span><span class="review-chevron">⌄</span></summary><div class="review-content"><p><b>先理解：</b>沒有一種真空計能在所有壓力範圍內都保持準確。量測原理可能直接感受壓力，也可能量測與氣體壓力相關的熱傳或離子電流。</p><ul><li>依預期壓力範圍選擇真空計，並留意氣體種類、安裝位置、污染和校正狀態。</li><li>分辨總壓量測、漏氣檢測和殘留氣體分析；真空計讀值本身通常不能指出漏點位置。</li><li>系統跨越大氣壓至高真空時，常需要不同原理的量測器搭配使用。</li></ul><div class="review-source">主要來源：真空技術第 0–4 章及第 5–6 章講義 <span class="review-pdf-links"><a href="./pdf/vacuum-lecture-chapters-0-4.pdf#view=FitH" class="review-pdf-link" data-pdf-open data-pdf-title="真空技術講義｜第 0 章至第 4 章">第 0–4 章 PDF</a><a href="./pdf/vacuum-lecture-chapters-5-6.pdf#view=FitH" class="review-pdf-link" data-pdf-open data-pdf-title="真空技術講義｜第 5 章至第 6 章">第 5–6 章 PDF</a></span></div><div class="review-actions"><button class="review-practice" data-review-chapter="3">練第 3 組題目 →</button></div></div></details>
+<details class="review-card"><summary><span class="review-number">04</span><span class="review-summary"><strong>真空材料與元件</strong></span><span class="review-chevron">⌄</span></summary><div class="review-content"><p><b>先理解：</b>材料與接合處會影響氣體負荷、可達壓力、耐烘烤性和污染。優先考慮低蒸氣壓、低放氣、可清潔且與製程相容的材料。</p><ul><li>認識不鏽鋼、鋁合金、無氧銅、陶瓷和彈性體各自的優缺點及適用情境。</li><li>法蘭、墊圈、焊接、波紋管與電氣穿隔件要兼顧密封、溫度和機械條件；CF 金屬密封與 O-ring 的使用限制不同。</li><li>清洗、乾燥和適當烘烤可降低水氣、油污與表面吸附造成的放氣；多孔或受污染表面會增加氣體負荷。</li></ul><div class="review-source">主要來源：真空技術第 0–4 章及第 5–6 章講義；薄膜基板清潔亦見光學薄膜講義 <span class="review-pdf-links"><a href="./pdf/vacuum-lecture-chapters-0-4.pdf#view=FitH" class="review-pdf-link" data-pdf-open data-pdf-title="真空技術講義｜第 0 章至第 4 章">第 0–4 章 PDF</a><a href="./pdf/vacuum-lecture-chapters-5-6.pdf#view=FitH" class="review-pdf-link" data-pdf-open data-pdf-title="真空技術講義｜第 5 章至第 6 章">第 5–6 章 PDF</a><a href="./pdf/optical-film-lecture.pdf#view=FitH" class="review-pdf-link" data-pdf-open data-pdf-title="光學薄膜技術講義">薄膜 PDF</a></span></div><div class="review-actions"><button class="review-practice" data-review-chapter="4">練第 4 組題目 →</button></div></div></details>
           </div>
         </section>
         <section class="review-topic-group" aria-labelledby="review-group-systems">
-          <div class="review-topic-group-head"><span>主題 05–06</span><div><h3 id="review-group-systems">系統設計與故障診斷</h3><p>把抽氣管路、氣體負荷與測漏方法連在一起。</p></div></div>
+          <div class="review-topic-group-head"><span>主題 05–06</span><div><h3 id="review-group-systems">系統設計與故障診斷</h3></div></div>
           <div class="review-grid">
-<details class="review-card"><summary><span class="review-number">05</span><span class="review-summary"><strong>真空系統與抽氣管路</strong><small>系統配置、氣體通量、氣導與有效抽速</small></span><span class="review-chevron">⌄</span></summary><div class="review-content"><p><b>先理解：</b>腔體端的有效抽速不只由幫浦銘牌決定，連接管路的氣導也會限制抽氣。系統由腔體、幫浦、真空計、閥、管路、接頭及應用元件組成。</p><ul><li>氣體負荷來自殘留氣體、表面脫附、材料放氣、蒸氣和可能的漏氣。</li><li>管路變長或變窄會降低氣導；串聯管段的總氣導受最小氣導限制，平行支路可增加總氣導。</li><li>閱讀系統圖時，沿腔體到幫浦的流路辨認閥門、真空計、放氣口和捕集器。</li></ul><div class="formula-row"><span class="formula-chip">S = dV/dt</span><span class="formula-chip">Q = P·S</span><span class="formula-chip">C = Q/(P₁−P₂)</span><span class="formula-chip">1/Sₑ = 1/Sₚ + 1/C</span></div><div class="review-source">主要來源：真空技術第 0–4 章及第 5–6 章講義；鍍膜系統流程見光學薄膜講義 <span class="review-pdf-links"><a href="#pdf-vacuum-04" class="review-pdf-link">第 0–4 章 PDF</a><a href="#pdf-vacuum-56" class="review-pdf-link">第 5–6 章 PDF</a><a href="#pdf-optical-film" class="review-pdf-link">薄膜 PDF</a></span></div><div class="review-actions"><button class="review-practice" data-review-chapter="5">練第 5 組題目 →</button></div></div></details>
-<details class="review-card"><summary><span class="review-number">06</span><span class="review-summary"><strong>真空測漏與故障診斷</strong><small>壓升測試、氦氣測漏、實漏與虛漏</small></span><span class="review-chevron">⌄</span></summary><div class="review-content"><p><b>先理解：</b>抽氣過慢或到不了目標壓力，可能來自實漏、虛漏、材料放氣、污染、幫浦異常、管路氣導不足或量測錯誤。</p><ul><li>壓升測試是在抽至低壓後隔離腔體並觀察壓力上升；結果可幫助判斷系統狀態，但不能單獨定位漏點。</li><li>實漏是外界與真空側有實際通道；虛漏常是盲孔、夾層或困住的氣體緩慢釋出。</li><li>依序檢查閥件與操作、隔離腔體、量測器讀值，再按課堂程序做氦氣測漏或氣體分析。</li></ul><div class="formula-row"><span class="formula-chip">Q ≈ V·ΔP/Δt（隔離升壓估算）</span></div><div class="review-source">主要來源：真空技術第 5–6 章講義 <span class="review-pdf-links"><a href="#pdf-vacuum-56" class="review-pdf-link">閱讀第 5–6 章 PDF</a></span></div><div class="review-actions"><button class="review-practice" data-review-chapter="6">練第 6 組題目 →</button></div></div></details>
+<details class="review-card"><summary><span class="review-number">05</span><span class="review-summary"><strong>真空系統與抽氣管路</strong></span><span class="review-chevron">⌄</span></summary><div class="review-content"><p><b>先理解：</b>腔體端的有效抽速不只由幫浦銘牌決定，連接管路的氣導也會限制抽氣。系統由腔體、幫浦、真空計、閥、管路、接頭及應用元件組成。</p><ul><li>氣體負荷來自殘留氣體、表面脫附、材料放氣、蒸氣和可能的漏氣。</li><li>管路變長或變窄會降低氣導；串聯管段的總氣導受最小氣導限制，平行支路可增加總氣導。</li><li>閱讀系統圖時，沿腔體到幫浦的流路辨認閥門、真空計、放氣口和捕集器。</li></ul><div class="formula-row"><span class="formula-chip">S = dV/dt</span><span class="formula-chip">Q = P·S</span><span class="formula-chip">C = Q/(P₁−P₂)</span><span class="formula-chip">1/Sₑ = 1/Sₚ + 1/C</span></div><div class="review-source">主要來源：真空技術第 0–4 章及第 5–6 章講義；鍍膜系統流程見光學薄膜講義 <span class="review-pdf-links"><a href="./pdf/vacuum-lecture-chapters-0-4.pdf#view=FitH" class="review-pdf-link" data-pdf-open data-pdf-title="真空技術講義｜第 0 章至第 4 章">第 0–4 章 PDF</a><a href="./pdf/vacuum-lecture-chapters-5-6.pdf#view=FitH" class="review-pdf-link" data-pdf-open data-pdf-title="真空技術講義｜第 5 章至第 6 章">第 5–6 章 PDF</a><a href="./pdf/optical-film-lecture.pdf#view=FitH" class="review-pdf-link" data-pdf-open data-pdf-title="光學薄膜技術講義">薄膜 PDF</a></span></div><div class="review-actions"><button class="review-practice" data-review-chapter="5">練第 5 組題目 →</button></div></div></details>
+<details class="review-card"><summary><span class="review-number">06</span><span class="review-summary"><strong>真空測漏與故障診斷</strong></span><span class="review-chevron">⌄</span></summary><div class="review-content"><p><b>先理解：</b>抽氣過慢或到不了目標壓力，可能來自實漏、虛漏、材料放氣、污染、幫浦異常、管路氣導不足或量測錯誤。</p><ul><li>壓升測試是在抽至低壓後隔離腔體並觀察壓力上升；結果可幫助判斷系統狀態，但不能單獨定位漏點。</li><li>實漏是外界與真空側有實際通道；虛漏常是盲孔、夾層或困住的氣體緩慢釋出。</li><li>依序檢查閥件與操作、隔離腔體、量測器讀值，再按課堂程序做氦氣測漏或氣體分析。</li></ul><div class="formula-row"><span class="formula-chip">Q ≈ V·ΔP/Δt（隔離升壓估算）</span></div><div class="review-source">主要來源：真空技術第 5–6 章講義 <span class="review-pdf-links"><a href="./pdf/vacuum-lecture-chapters-5-6.pdf#view=FitH" class="review-pdf-link" data-pdf-open data-pdf-title="真空技術講義｜第 5 章至第 6 章">閱讀第 5–6 章 PDF</a></span></div><div class="review-actions"><button class="review-practice" data-review-chapter="6">練第 6 組題目 →</button></div></div></details>
           </div>
         </section>
         <section class="review-topic-group" aria-labelledby="review-group-coatings">
-          <div class="review-topic-group-head"><span>主題 07</span><div><h3 id="review-group-coatings">光學薄膜製程</h3><p>整理薄膜、鍍膜方法、電漿與品質量測。</p></div></div>
+          <div class="review-topic-group-head"><span>主題 07</span><div><h3 id="review-group-coatings">光學薄膜製程</h3></div></div>
           <div class="review-grid">
-<details class="review-card"><summary><span class="review-number">07</span><span class="review-summary"><strong>光學薄膜、鍍膜與電漿</strong><small>PVD、熱蒸鍍、濺鍍、基板準備與膜層量測</small></span><span class="review-chevron">⌄</span></summary><div class="review-content"><p><b>先理解：</b>PVD 的共同步驟是產生氣相材料、讓粒子在低壓環境中傳輸，再使粒子到達基板並凝結成膜。真空可減少氣體碰撞與污染。</p><ul><li>基板需清洗、乾燥、檢查並妥善裝載；避免灰塵、油污和水痕影響附著與膜層缺陷。</li><li>熱蒸鍍以加熱使材料蒸發；濺鍍以離子撞擊靶材並傳遞動量。DC 常配合導電靶，RF 可用於絕緣靶材。</li><li>流程包括裝片、抽真空、確認條件、鍍膜、冷卻、依程序破真空、取片與量測。膜厚、均勻性與光譜特性是不同的品質檢查項目。</li><li>濺射產率可理解為入射離子造成的靶材原子逸出數；電漿、工作氣壓和基板位置都會影響製程結果。</li></ul><div class="formula-row"><span class="formula-chip">電阻加熱：P = I²R</span><span class="formula-chip">濺射產率 = 濺出靶原子數／入射離子數</span></div><div class="review-source">主要來源：光學薄膜技術講義；真空環境與幫浦搭配見真空技術講義 <span class="review-pdf-links"><a href="#pdf-optical-film" class="review-pdf-link">薄膜 PDF</a><a href="#pdf-vacuum-04" class="review-pdf-link">真空 0–4 章 PDF</a><a href="#pdf-vacuum-56" class="review-pdf-link">真空 5–6 章 PDF</a></span></div><div class="review-actions"><button class="review-practice" data-review-chapter="7">練第 7 組題目 →</button></div></div></details>
+<details class="review-card"><summary><span class="review-number">07</span><span class="review-summary"><strong>光學薄膜、鍍膜與電漿</strong></span><span class="review-chevron">⌄</span></summary><div class="review-content"><p><b>先理解：</b>PVD 的共同步驟是產生氣相材料、讓粒子在低壓環境中傳輸，再使粒子到達基板並凝結成膜。真空可減少氣體碰撞與污染。</p><ul><li>基板需清洗、乾燥、檢查並妥善裝載；避免灰塵、油污和水痕影響附著與膜層缺陷。</li><li>熱蒸鍍以加熱使材料蒸發；濺鍍以離子撞擊靶材並傳遞動量。DC 常配合導電靶，RF 可用於絕緣靶材。</li><li>流程包括裝片、抽真空、確認條件、鍍膜、冷卻、依程序破真空、取片與量測。膜厚、均勻性與光譜特性是不同的品質檢查項目。</li><li>濺射產率可理解為入射離子造成的靶材原子逸出數；電漿、工作氣壓和基板位置都會影響製程結果。</li></ul><div class="formula-row"><span class="formula-chip">電阻加熱：P = I²R</span><span class="formula-chip">濺射產率 = 濺出靶原子數／入射離子數</span></div><div class="review-source">主要來源：光學薄膜技術講義；真空環境與幫浦搭配見真空技術講義 <span class="review-pdf-links"><a href="./pdf/optical-film-lecture.pdf#view=FitH" class="review-pdf-link" data-pdf-open data-pdf-title="光學薄膜技術講義">薄膜 PDF</a><a href="./pdf/vacuum-lecture-chapters-0-4.pdf#view=FitH" class="review-pdf-link" data-pdf-open data-pdf-title="真空技術講義｜第 0 章至第 4 章">真空 0–4 章 PDF</a><a href="./pdf/vacuum-lecture-chapters-5-6.pdf#view=FitH" class="review-pdf-link" data-pdf-open data-pdf-title="真空技術講義｜第 5 章至第 6 章">真空 5–6 章 PDF</a></span></div><div class="review-actions"><button class="review-practice" data-review-chapter="7">練第 7 組題目 →</button></div></div></details>
           </div>
         </section>
       </div>
       <section class="study-materials" aria-labelledby="study-materials-title">
-        <div class="study-section-head"><div><h2 id="study-materials-title">原始課堂講義</h2><p>需要核對公式、數值或設備細節時，開啟老師提供的完整教材。</p></div></div>
+        <div class="study-section-head"><div><h2 id="study-materials-title">原始課堂講義</h2></div></div>
         <div class="doc-grid" aria-label="原始課堂教材">
-          <article class="doc-card" id="pdf-vacuum-04"><strong>真空技術講義｜第 0 章至第 4 章</strong><span>真空基本概念、氣體性質與基礎技術・PDF 約 44 MB</span><details class="doc-preview"><summary>在本頁閱讀講義</summary><div class="doc-preview-frame"><iframe data-pdf-src="./pdf/vacuum-lecture-chapters-0-4.pdf#view=FitH" title="真空技術講義第 0 章至第 4 章" loading="lazy"></iframe></div><p class="doc-preview-note">如果此瀏覽器不支援內嵌閱讀，可<a href="./pdf/vacuum-lecture-chapters-0-4.pdf" target="_blank" rel="noopener">開啟完整 PDF ↗</a>，或<a href="./pdf/vacuum-lecture-chapters-0-4.pdf" download>下載檔案</a>。</p></details></article>
-          <article class="doc-card" id="pdf-vacuum-56"><strong>真空技術講義｜第 5 章至第 6 章</strong><span>真空系統與測漏等後續主題・PDF 約 17 MB</span><details class="doc-preview"><summary>在本頁閱讀講義</summary><div class="doc-preview-frame"><iframe data-pdf-src="./pdf/vacuum-lecture-chapters-5-6.pdf#view=FitH" title="真空技術講義第 5 章至第 6 章" loading="lazy"></iframe></div><p class="doc-preview-note">如果此瀏覽器不支援內嵌閱讀，可<a href="./pdf/vacuum-lecture-chapters-5-6.pdf" target="_blank" rel="noopener">開啟完整 PDF ↗</a>，或<a href="./pdf/vacuum-lecture-chapters-5-6.pdf" download>下載檔案</a>。</p></details></article>
-          <article class="doc-card" id="pdf-optical-film"><strong>光學薄膜技術講義</strong><span>薄膜製程、蒸鍍／濺鍍、品質與量測・PDF 約 34 MB</span><details class="doc-preview"><summary>在本頁閱讀講義</summary><div class="doc-preview-frame"><iframe data-pdf-src="./pdf/optical-film-lecture.pdf#view=FitH" title="光學薄膜技術講義" loading="lazy"></iframe></div><p class="doc-preview-note">如果此瀏覽器不支援內嵌閱讀，可<a href="./pdf/optical-film-lecture.pdf" target="_blank" rel="noopener">開啟完整 PDF ↗</a>，或<a href="./pdf/optical-film-lecture.pdf" download>下載檔案</a>。</p></details></article>
+          <article class="doc-card" id="pdf-vacuum-04"><strong>真空技術講義｜第 0 章至第 4 章</strong><a class="doc-open" href="./pdf/vacuum-lecture-chapters-0-4.pdf#view=FitH" target="_blank" rel="noopener" data-pdf-open data-pdf-title="真空技術講義｜第 0 章至第 4 章">開啟 PDF ↗</a></article>
+          <article class="doc-card" id="pdf-vacuum-56"><strong>真空技術講義｜第 5 章至第 6 章</strong><a class="doc-open" href="./pdf/vacuum-lecture-chapters-5-6.pdf#view=FitH" target="_blank" rel="noopener" data-pdf-open data-pdf-title="真空技術講義｜第 5 章至第 6 章">開啟 PDF ↗</a></article>
+          <article class="doc-card" id="pdf-optical-film"><strong>光學薄膜技術講義</strong><a class="doc-open" href="./pdf/optical-film-lecture.pdf#view=FitH" target="_blank" rel="noopener" data-pdf-open data-pdf-title="光學薄膜技術講義">開啟 PDF ↗</a></article>
         </div>
       </section>
-      <p class="study-footnote"><b>複習建議：</b>先讀一個主題並遮住重點自我說明，再做該組題目。題號依主題對應整理，跨主題題目可能重複；特定數值、真空計量程及設備參數請回到原始投影片核對。</p>
+
     </section>
 
     <section class="view progress-view" id="progress-view">
@@ -1054,9 +1069,56 @@
       });
     })();
   </script>
+<div class="pdf-reader" id="pdf-reader" hidden aria-hidden="true">
+  <section class="pdf-reader-panel" role="dialog" aria-modal="true" aria-labelledby="pdf-reader-title">
+    <header class="pdf-reader-toolbar">
+      <h2 class="pdf-reader-title" id="pdf-reader-title">PDF</h2>
+      <div class="pdf-reader-actions">
+        <a class="pdf-reader-new-tab" id="pdf-reader-new-tab" href="#" target="_blank" rel="noopener" aria-label="另開分頁">↗</a>
+        <button class="pdf-reader-close" id="pdf-reader-close" type="button" aria-label="關閉">×</button>
+      </div>
+    </header>
+    <iframe class="pdf-reader-frame" id="pdf-reader-frame" title="課堂講義 PDF"></iframe>
+  </section>
+</div>
 <script id="inline-pdf-reader-behavior">
-document.querySelectorAll('.doc-preview').forEach(function(panel){panel.addEventListener('toggle',function(){if(!panel.open)return;var frame=panel.querySelector('iframe[data-pdf-src]');if(frame&&!frame.getAttribute('src'))frame.src=frame.dataset.pdfSrc;});});
-document.addEventListener('click',function(event){var link=event.target.closest('.review-pdf-link');if(!link)return;var card=document.querySelector(link.getAttribute('href'));var panel=card&&card.querySelector('.doc-preview');if(!panel)return;panel.open=true;var frame=panel.querySelector('iframe[data-pdf-src]');if(frame&&!frame.getAttribute('src'))frame.src=frame.dataset.pdfSrc;});
+(function(){
+  var reader=document.getElementById('pdf-reader');
+  var frame=document.getElementById('pdf-reader-frame');
+  var title=document.getElementById('pdf-reader-title');
+  var closeButton=document.getElementById('pdf-reader-close');
+  var newTab=document.getElementById('pdf-reader-new-tab');
+  if(!reader||!frame||!title||!closeButton||!newTab)return;
+  var lastTrigger=null;
+  function closeReader(){
+    if(reader.hidden)return;
+    reader.hidden=true;
+    reader.setAttribute('aria-hidden','true');
+    document.body.classList.remove('pdf-reader-open');
+    frame.removeAttribute('src');
+    newTab.removeAttribute('href');
+    if(lastTrigger&&typeof lastTrigger.focus==='function')lastTrigger.focus();
+  }
+  function openReader(trigger){
+    var src=trigger.getAttribute('href');
+    if(!src)return;
+    lastTrigger=trigger;
+    title.textContent=trigger.getAttribute('data-pdf-title')||'PDF';
+    frame.src=src;
+    newTab.href=src;
+    reader.hidden=false;
+    reader.setAttribute('aria-hidden','false');
+    document.body.classList.add('pdf-reader-open');
+    closeButton.focus();
+  }
+  document.addEventListener('click',function(event){
+    var trigger=event.target.closest('[data-pdf-open]');
+    if(trigger){event.preventDefault();openReader(trigger);return;}
+    if(event.target===reader)closeReader();
+  });
+  closeButton.addEventListener('click',closeReader);
+  document.addEventListener('keydown',function(event){if(event.key==='Escape')closeReader();});
+})();
 </script>
 </body>
 </html>
