@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">真空技術學習室 app icon concept</title>
+  <desc id="desc">A dark navy app icon with a glowing vacuum chamber and a pressure gauge, without lettering.</desc>
+  <defs>
+    <radialGradient id="background" cx="48%" cy="37%" r="75%">
+      <stop offset="0" stop-color="#15304f"/>
+      <stop offset=".58" stop-color="#0b1a30"/>
+      <stop offset="1" stop-color="#07111f"/>
+    </radialGradient>
+    <linearGradient id="frame" x1="105" y1="110" x2="930" y2="910" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#52f2ed"/>
+      <stop offset=".43" stop-color="#3c9dff"/>
+      <stop offset=".76" stop-color="#8972ff"/>
+      <stop offset="1" stop-color="#ef62cf"/>
+    </linearGradient>
+    <linearGradient id="orbit" x1="220" y1="430" x2="805" y2="650" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#56f4ea"/>
+      <stop offset=".52" stop-color="#58b7ff"/>
+      <stop offset="1" stop-color="#ac7bff"/>
+    </linearGradient>
+    <radialGradient id="core" cx="42%" cy="30%" r="85%">
+      <stop stop-color="#16385a"/>
+      <stop offset="1" stop-color="#09182b"/>
+    </radialGradient>
+    <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- iOS-safe rounded-square silhouette; keep key details well inside the mask -->
+  <rect width="1024" height="1024" rx="224" fill="url(#background)"/>
+  <rect x="18" y="18" width="988" height="988" rx="218" fill="none" stroke="url(#frame)" stroke-width="12" opacity=".95"/>
+  <rect x="39" y="39" width="946" height="946" rx="198" fill="none" stroke="#dffcff" stroke-opacity=".12" stroke-width="2"/>
+
+  <!-- Quiet instrument-dial ticks suggest precision without crowding the icon -->
+  <g stroke="#8fcaff" stroke-opacity=".46" stroke-linecap="round">
+    <path d="M512 166v24M512 834v24M166 512h24M834 512h24" stroke-width="5"/>
+    <path d="M267 267l17 17M740 740l17 17M757 267l-17 17M284 740l-17 17" stroke-width="4"/>
+  </g>
+
+  <!-- Vacuum chamber -->
+  <circle cx="512" cy="512" r="286" fill="none" stroke="#46cafa" stroke-opacity=".2" stroke-width="32" filter="url(#softGlow)"/>
+  <circle cx="512" cy="512" r="273" fill="url(#core)" stroke="url(#orbit)" stroke-width="10"/>
+  <circle cx="512" cy="512" r="246" fill="none" stroke="#a1eaf8" stroke-opacity=".23" stroke-width="2"/>
+  <circle cx="512" cy="512" r="219" fill="none" stroke="#70cfff" stroke-opacity=".2" stroke-width="2" stroke-dasharray="2 13"/>
+
+  <!-- A restrained orbital path and three particles evoke a low-pressure chamber -->
+  <ellipse cx="512" cy="512" rx="316" ry="116" transform="rotate(-31 512 512)" fill="none" stroke="url(#orbit)" stroke-width="9" opacity=".92"/>
+  <circle cx="235" cy="352" r="13" fill="#63f4ed" filter="url(#softGlow)"/>
+  <circle cx="783" cy="357" r="10" fill="#89c6ff" filter="url(#softGlow)"/>
+  <circle cx="759" cy="673" r="9" fill="#c18aff" filter="url(#softGlow)"/>
+
+  <!-- Pressure gauge: a clear vacuum-study symbol with no lettering -->
+  <circle cx="512" cy="512" r="157" fill="#09182b" stroke="#a0eff8" stroke-opacity=".76" stroke-width="5"/>
+  <circle cx="512" cy="512" r="143" fill="url(#core)" stroke="url(#orbit)" stroke-width="5"/>
+  <path d="M407 558Q512 410 617 558" fill="none" stroke="#63e8ee" stroke-opacity=".58" stroke-width="5" stroke-linecap="round"/>
+  <g transform="translate(512 512)" stroke="#c8f8ff" stroke-width="7" stroke-linecap="round" opacity=".9">
+    <path d="M0-101v19" transform="rotate(-120)"/>
+    <path d="M0-101v19" transform="rotate(-90)"/>
+    <path d="M0-101v19" transform="rotate(-60)"/>
+    <path d="M0-101v19" transform="rotate(-30)"/>
+    <path d="M0-101v19"/>
+    <path d="M0-101v19" transform="rotate(30)"/>
+    <path d="M0-101v19" transform="rotate(60)"/>
+    <path d="M0-101v19" transform="rotate(90)"/>
+    <path d="M0-101v19" transform="rotate(120)"/>
+  </g>
+  <path d="M512 512l-72-73" fill="none" stroke="url(#orbit)" stroke-width="15" stroke-linecap="round"/>
+  <path d="M512 512l40 40" fill="none" stroke="#72e8ee" stroke-opacity=".72" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="512" cy="512" r="21" fill="url(#orbit)" stroke="#e6ffff" stroke-width="4"/>
+  <circle cx="512" cy="512" r="7" fill="#f4ffff"/>
+</svg>
